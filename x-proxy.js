@@ -61,18 +61,20 @@ proxy.on('proxyReq', function(proxyReq, req, res, options) {
   }
 
   proxyReq.setHeader('host', src.domain)
-  req.startTime = new Date
+  req.startTime = new Date()
 })
 
 
 proxy.on('proxyRes', function(proxyRes, req, res) {
   var destDomain = getDestDomain(req.headers.host)
   for (var key in proxyRes.headers) {
-    proxyRes.headers[key] = proxyRes.headers[key].split(src.domain).join(destDomain)
+    if (typeof proxyRes.headers[key] === 'string' ) {
+      proxyRes.headers[key] = proxyRes.headers[key].split(src.domain).join(destDomain)
+    }
   }
 
   var contentType = proxyRes.headers['content-type']
-  if ((typeof contentType !== 'undefined') && (contentType.indexOf('text/') == 0)) {
+  if ((typeof contentType !== 'undefined') && (contentType.indexOf('text/') === 0)) {
     res.isText = true
     delete proxyRes.headers['content-type']
   }
@@ -88,7 +90,7 @@ proxy.on('end', function(req, res, proxyRes) {
   }
 
   if (!!debug) {
-    console.log("http://%s%s time:%d isText:%d length:%d", req.headers.host, req.url, new Date-req.startTime, res.isText, dataLen)
+    console.log("http://%s%s time:%d isText:%d length:%d", req.headers.host, req.url, new Date()-req.startTime, res.isText, dataLen)
   }  
 })
 
