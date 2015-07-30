@@ -1,11 +1,9 @@
 {
-    "name": "manga-proxy",
+    "name": "x-proxy",
     "version": "0.0.1",
     "private": true,
     "dependencies": {
         "http-proxy": "",
-        "connect": "",
-        "harmon": "",
         "optimist": ""
     }
 }
