@@ -12,7 +12,7 @@ var src = config.src
 var sites = config.sites
 
 var proxy = httpProxy.createProxyServer({
-  target: 'http://' + src.domain
+  target: 'http://' + src.domain + ':' + src.port
 })
 
 var getDestDomain = function(host) {
