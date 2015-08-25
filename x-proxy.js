@@ -85,7 +85,6 @@ proxy.on('end', function(req, res, proxyRes) {
   if (res.isText) {
     var data = res.datas.join('')
     data = purify(data, req.headers.host)
-    res.setHeader('Content-Length', data.length)
     res.end(data)
     dataLen = data.length
   }
