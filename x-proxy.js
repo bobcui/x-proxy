@@ -12,7 +12,7 @@ var src = config.src
 var sites = config.sites
 
 var proxy = httpProxy.createProxyServer({
-  target: 'http://' + src.domain + ':' + src.port
+  target: 'http://' + src.proxy
 })
 
 var getDestDomain = function(host) {
@@ -41,7 +41,9 @@ var purify = function(data, host) {
   siteConfig.siteName = getDestSiteName(host)
 
   for (var key in src) {
-    data = data.split(src[key]).join(siteConfig[key])
+    if (!!siteConfig[key]) {
+      data = data.split(src[key]).join(siteConfig[key])
+    }
   }
   return data
 }

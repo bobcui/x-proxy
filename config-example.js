@@ -1,7 +1,7 @@
 module.exports = {
   src: {
+    proxy: 'www.proxy.com'
     domain: 'www.src.com',
-    port: 80,
     siteName: 'srcSite',
     ga: 'srcGa'
   },
